@@ -41,3 +41,38 @@ io.on("connection", (socket) => {
     console.log("user disconnected"); // Disconnect message
   });
 });
+
+
+// src/socket.ts
+import { io } from "socket.io-client";
+
+const URL = "http://localhost:4000"; // Your backend URL
+
+export const socket = io(URL);
+
+
+
+// In a React component (e.g., App.tsx or useEffect hook)
+
+import { useEffect } from "react";
+import { socket } from "./socket";
+
+const App = () => {
+  useEffect(() => {
+    if (socket) {
+      socket.on("user-connect", () => {
+        console.log("a msg: user connected");
+      });
+    }
+
+    // Clean up listener on unmount
+    return () => {
+      socket.off("user-connect");
+    };
+  }, []);
+
+  return <div>Socket.IO Demo</div>;
+};
+
+export default App;
+
