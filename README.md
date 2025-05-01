@@ -42,7 +42,11 @@ io.on("connection", (socket) => {
   });
 });
 
+```
 
+## 🖥️ Front End (React Socket.IO)
+
+```js
 // src/socket.ts
 import { io } from "socket.io-client";
 
